@@ -17,6 +17,9 @@ class App extends React.Component {
       .then((response) => response.json())
       .then((users) => this.setState({ monsters: users }));
   }
+  handleFunction = (e) => {
+    this.setState({ searchField: e.target.value });
+  }
   render() {
     //se met à jopur à chaque onchange
     const { monsters,searchField } = this.state;
@@ -25,13 +28,13 @@ class App extends React.Component {
     const filteredMonsters = monsters.filter((monster) =>  
       monster.name.toLowerCase().includes(searchField.toLowerCase())
     );
+   
     console.log(monsters)
   {console.log(filteredMonsters)}
     return (
       <div className="App">
-        <SearchBox placeholder = "Rechercher les chats" handleFunction = {(e) => {
-            this.setState({ searchField: e.target.value });
-          }} />
+        <h1> Les chats </h1>
+        <SearchBox placeholder = "Rechercher les chats" handleFunction = {this.handleFunction} />
         <CardList monsters={filteredMonsters}></CardList>
       </div>
     );
